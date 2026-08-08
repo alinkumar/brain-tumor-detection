@@ -1,0 +1,1021 @@
+/* ==========================================================
+   Brain Tumor Detection AI
+   Premium Medical Dashboard
+   Part 1
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body,
+[class*="css"]{
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+.stApp{
+
+    background:
+
+    radial-gradient(circle at top left,#2563eb22,transparent 25%),
+
+    radial-gradient(circle at bottom right,#7c3aed22,transparent 30%),
+
+    radial-gradient(circle at center,#0ea5e922,transparent 35%),
+
+    linear-gradient(
+        145deg,
+        #050816,
+        #07101d,
+        #0b1220
+    );
+
+    background-attachment:fixed;
+
+    color:white;
+
+}
+
+/* Hide Streamlit */
+
+header{
+
+    visibility:hidden;
+
+}
+
+footer{
+
+    visibility:hidden;
+
+}
+
+#MainMenu{
+
+    visibility:hidden;
+
+}
+
+.block-container{
+
+    padding-top:30px;
+
+    padding-left:5%;
+
+    padding-right:5%;
+
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:32px;
+
+    padding:70px 40px;
+
+    text-align:center;
+
+    backdrop-filter:blur(25px);
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    rgba(15,23,42,.96),
+
+    rgba(17,24,39,.94)
+
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+
+    0 25px 80px rgba(0,0,0,.45),
+
+    inset 0 1px 0 rgba(255,255,255,.08),
+
+    0 0 60px rgba(37,99,235,.18);
+
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    background:#3b82f6;
+
+    filter:blur(140px);
+
+    opacity:.18;
+
+    top:-120px;
+
+    left:-120px;
+
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    background:#8b5cf6;
+
+    filter:blur(140px);
+
+    opacity:.18;
+
+    bottom:-120px;
+
+    right:-120px;
+
+}
+
+.hero h1{
+
+    font-size:64px;
+
+    font-weight:800;
+
+    color:white;
+
+    margin-bottom:10px;
+
+    letter-spacing:.5px;
+
+}
+
+.hero p{
+
+    color:#cbd5e1;
+
+    font-size:21px;
+
+    margin-bottom:28px;
+
+}
+
+.hero-badges{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+
+}
+
+.hero-badges span{
+
+    padding:12px 22px;
+
+    border-radius:50px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.04);
+
+    color:#e2e8f0;
+
+    transition:.35s;
+
+}
+
+.hero-badges span:hover{
+
+    transform:translateY(-5px);
+
+    background:#2563eb;
+
+    box-shadow:0 0 25px rgba(37,99,235,.45);
+
+}
+
+/* Animated Line */
+
+.hero::selection{
+
+    background:#2563eb;
+
+}
+
+.glow-line{
+
+    width:180px;
+
+    height:4px;
+
+    border-radius:30px;
+
+    margin:28px auto;
+
+    background:linear-gradient(
+
+        90deg,
+
+        #06b6d4,
+
+        #3b82f6,
+
+        #8b5cf6
+
+    );
+
+    box-shadow:
+
+    0 0 18px #3b82f6,
+
+    0 0 35px #8b5cf6;
+
+}
+
+/* ================= Cards ================= */
+
+.card{
+
+    margin-top:30px;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    background:
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(15,23,42,.96),
+
+        rgba(17,24,39,.92)
+
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+    text-align:center;
+
+    backdrop-filter:blur(20px);
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#3b82f6;
+
+    box-shadow:
+
+    0 18px 45px rgba(0,0,0,.45),
+
+    0 0 35px rgba(37,99,235,.30);
+
+}
+
+.icon{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+}
+
+.card h3{
+
+    color:#94a3b8;
+
+    font-size:18px;
+
+}
+
+.card h2{
+
+    color:white;
+
+    font-size:34px;
+
+    margin-top:10px;
+
+}
+
+/* ==========================================================
+   Upload Section
+========================================================== */
+
+.upload-card{
+
+    margin-top:35px;
+
+    padding:45px;
+
+    border-radius:30px;
+
+    border:2px dashed rgba(59,130,246,.6);
+
+    background:
+
+    linear-gradient(
+        145deg,
+        rgba(15,23,42,.95),
+        rgba(10,18,32,.92)
+    );
+
+    backdrop-filter:blur(25px);
+
+    transition:.4s;
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.upload-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#3b82f6;
+
+    box-shadow:
+
+    0 20px 55px rgba(37,99,235,.25),
+
+    0 0 35px rgba(59,130,246,.18);
+
+}
+
+.upload-card h2{
+
+    text-align:center;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.upload-card p{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:17px;
+
+}
+
+
+/* ==========================================================
+   Streamlit File Uploader
+========================================================== */
+
+[data-testid="stFileUploader"]{
+
+    background:rgba(255,255,255,.03);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    border:2px dashed #3b82f6;
+
+    transition:.35s;
+
+}
+
+[data-testid="stFileUploader"]:hover{
+
+    border-color:#60a5fa;
+
+    background:rgba(37,99,235,.06);
+
+    box-shadow:0 0 30px rgba(59,130,246,.18);
+
+}
+
+[data-testid="stFileUploader"] section{
+
+    border:none !important;
+
+    background:transparent !important;
+
+}
+
+
+/* ==========================================================
+   Buttons
+========================================================== */
+
+.stButton>button{
+
+    width:100%;
+
+    height:58px;
+
+    border-radius:18px;
+
+    border:none;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    box-shadow:
+
+    0 15px 35px rgba(37,99,235,.35);
+
+}
+
+.stButton>button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+
+    0 20px 45px rgba(37,99,235,.45);
+
+}
+
+
+/* ==========================================================
+   Metrics
+========================================================== */
+
+[data-testid="metric-container"]{
+
+    background:
+
+    linear-gradient(
+        145deg,
+        rgba(15,23,42,.95),
+        rgba(17,24,39,.92)
+    );
+
+    border-radius:20px;
+
+    padding:15px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+}
+
+[data-testid="metric-container"]:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#3b82f6;
+
+}
+
+
+/* ==========================================================
+   Progress Bars
+========================================================== */
+
+.stProgress{
+
+    height:12px;
+
+}
+
+.stProgress>div>div{
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #06b6d4,
+        #3b82f6,
+        #8b5cf6
+    );
+
+}
+
+
+/* ==========================================================
+   Success / Warning / Error
+========================================================== */
+
+.stSuccess{
+
+    border-radius:16px;
+
+}
+
+.stWarning{
+
+    border-radius:16px;
+
+}
+
+.stError{
+
+    border-radius:16px;
+
+}
+
+
+/* ==========================================================
+   Images
+========================================================== */
+
+img{
+
+    border-radius:22px;
+
+    transition:.35s;
+
+}
+
+img:hover{
+
+    transform:scale(1.02);
+
+}
+
+
+/* ==========================================================
+   Horizontal Line
+========================================================== */
+
+hr{
+
+    border:none;
+
+    height:1px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        #3b82f6,
+        transparent
+    );
+
+}
+
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+footer{
+
+    visibility:hidden;
+
+}
+
+.footer{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    margin-top:40px;
+
+    font-size:15px;
+
+}
+
+
+/* ==========================================================
+   Scrollbar
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#07101d;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#3b82f6;
+
+    border-radius:50px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#60a5fa;
+
+}
+
+
+/* ==========================================================
+   Animation
+========================================================== */
+
+.hero,
+.card,
+.upload-card{
+
+    animation:fadeUp .8s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================================
+   PREMIUM RESULT CARD
+========================================================== */
+
+.result-card{
+
+    margin-top:35px;
+
+    border-radius:28px;
+
+    padding:35px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        rgba(15,23,42,.95),
+        rgba(17,24,39,.90)
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.35),
+    0 0 30px rgba(59,130,246,.18);
+
+    backdrop-filter:blur(25px);
+
+}
+
+.result-title{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:white;
+
+    margin-bottom:25px;
+
+}
+
+.prediction{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    color:#3B82F6;
+
+}
+
+.confidence{
+
+    margin-top:10px;
+
+    font-size:22px;
+
+    color:#CBD5E1;
+
+}
+
+
+/* ==========================================================
+   AI STATUS BADGE
+========================================================== */
+
+.badge{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+
+    color:white;
+
+    font-weight:600;
+
+    margin-top:18px;
+
+    box-shadow:
+    0 10px 25px rgba(34,197,94,.30);
+
+}
+
+
+/* ==========================================================
+   PROBABILITY CARDS
+========================================================== */
+
+.prob-card{
+
+    margin-top:18px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transition:.35s;
+
+}
+
+.prob-card:hover{
+
+    transform:translateX(6px);
+
+    border-color:#3B82F6;
+
+}
+
+
+/* ==========================================================
+   GLASS PANEL
+========================================================== */
+
+.glass{
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+}
+
+
+/* ==========================================================
+   IMAGE PANEL
+========================================================== */
+
+.image-panel{
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.30);
+
+}
+
+
+/* ==========================================================
+   CUSTOM SCROLL ANIMATION
+========================================================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+/* ==========================================================
+   FLOATING BLUR CIRCLES
+========================================================== */
+
+.hero::before{
+
+    animation:floatBlue 9s ease-in-out infinite;
+
+}
+
+.hero::after{
+
+    animation:floatPurple 11s ease-in-out infinite;
+
+}
+
+@keyframes floatBlue{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-30px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+@keyframes floatPurple{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(30px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   GLOW EFFECT
+========================================================== */
+
+.glow{
+
+    position:relative;
+
+}
+
+.glow::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-2px;
+
+    border-radius:inherit;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        #3B82F6,
+        transparent
+    );
+
+    filter:blur(16px);
+
+    opacity:.35;
+
+    z-index:-1;
+
+}
+
+
+/* ==========================================================
+   MOBILE RESPONSIVE
+========================================================== */
+
+@media(max-width:900px){
+
+.hero{
+
+padding:45px 20px;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.card{
+
+margin-top:18px;
+
+}
+
+.upload-card{
+
+padding:28px;
+
+}
+
+.prediction{
+
+font-size:30px;
+
+}
+
+.result-title{
+
+font-size:26px;
+
+}
+
+}
+
+
+/* ==========================================================
+   END
+========================================================== */
