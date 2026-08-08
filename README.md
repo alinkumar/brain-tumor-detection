@@ -298,6 +298,9 @@ Class-level evaluation is particularly important because the four categories do 
 ```text
 brain-tumor-detection/
 │
+├── .streamlit/
+│   └── config.toml
+|
 ├── assets/
 │   └── screenshots/
 │       ├── Application Preview.png
@@ -569,4 +572,3 @@ Built with an emphasis on transparent evaluation, explainability and responsible
 <sub>© 2026 Alin Kumar</sub>
 
 </div>
-```
