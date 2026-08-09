@@ -132,23 +132,27 @@ The trained network produces a probability distribution across the four target c
 
 ---
 
-## 📊 Validation Performance
+## 📊 Test Performance
 
-The final model achieved an overall **84.32% validation accuracy** on the evaluated validation set.
+The final **EfficientNetB0 + Focal Loss** model achieved **77.41% test accuracy** on the held-out test set.
 
 | Class | Precision | Recall | F1-Score |
 |---|---:|---:|---:|
-| 🧠 Glioma Tumor | 85.68% | 85.43% | 86.00% |
-| 🔬 Meningioma Tumor | 82.98% | 68.66% | 74.05% |
-| ✅ No Tumor | 91.78% | 87.01% | 89.33% |
-| 🧬 Pituitary Tumor | 81.04% | 100.00% | 89.53% |
-| **Overall Accuracy** | — | — | **84.32%** |
+| 🧠 Glioma Tumor | 0.56 | 0.15 | 0.24 |
+| 🔬 Meningioma Tumor | 0.63 | 0.72 | 0.67 |
+| ✅ No Tumor | 0.66 | 0.83 | 0.73 |
+| 🧬 Pituitary Tumor | 0.61 | 0.85 | 0.71 |
+| **Overall Accuracy** | — | — | **77.41%** |
 
-### Performance Interpretation
+**Macro F1-Score:** 0.74 · **Weighted F1-Score:** 0.73
 
-The model shows comparatively strong performance for **No Tumor** and **Pituitary Tumor**.
+## Performance Interpretation
 
-The **Meningioma** category is more challenging, particularly in recall. This difference is explicitly reported to provide a realistic view of class-level model behavior rather than relying only on overall accuracy.
+The model demonstrates comparatively stronger performance on **Meningioma, No Tumor and Pituitary Tumor** categories.
+
+**Glioma Tumor is the most challenging class for the current model**, with a substantially lower recall of **0.15**. This means that a portion of actual Glioma cases may be missed by the classifier.
+
+The project intentionally reports this class-specific limitation rather than relying only on the overall accuracy.
 
 ---
 
@@ -247,7 +251,7 @@ A multi-class model should not be evaluated using overall accuracy alone. The va
 
 ### Current Limitations
 
-- **Meningioma recall is comparatively lower** than the other evaluated classes.
+- **Glioma recall is comparatively lower** than the other evaluated classes and is the primary class-specific limitation of the current model.
 - The model can become less confident when an MRI differs substantially from the data distribution used during development.
 - Image quality and acquisition characteristics can influence model predictions.
 - Ambiguous or unfamiliar images may result in incorrect classifications.
@@ -255,6 +259,18 @@ A multi-class model should not be evaluated using overall accuracy alone. The va
 - The reported validation performance should not be interpreted as clinical-grade diagnostic accuracy.
 
 > **These limitations are intentionally documented to make the project transparent and realistic rather than presenting the model as infallible.**
+
+---
+
+---
+
+## ⚕️ Class-Specific Reliability Precaution
+
+**Glioma Tumor is the most challenging class for the current model.** Predictions for Glioma should therefore be treated with additional caution, particularly when MRI images are ambiguous, low-quality or substantially different from the data used during model development.
+
+More generally, predictions across all four classes can be incorrect and should not be interpreted as a medical diagnosis.
+
+> **Important:** This system is an educational and research-oriented AI prototype. It should not be used to confirm or rule out a brain tumor or replace professional radiological or clinical assessment.
 
 ---
 
@@ -313,6 +329,7 @@ brain-tumor-detection/
 ├── app.py
 ├── utils.py
 ├── best_brain_tumor_model.keras
+├── Brain_Tumor_Detection.ipynb
 ├── requirements.txt
 ├── style.css
 ├── .gitignore
